@@ -9,7 +9,7 @@ if str(cash_credit) == 'credit':
         if int(split) < int(min):
                 print("Not enough for credit")
         else:
-                print('Each person pays ' + str(split) + ' dollars' 'and tips ' + str(tips))
+                print('Each person pays ' + str(round(split, 2)) + ' dollars' ' and tips ' + str(round(tips, 2)))
         
 else:
-        print('Each person pays ' + str(split) + ' dollars' 'and tips ' + str(tips))
+        print('Each person pays ' + str(round(split, 2)) + ' dollars' ' and tips ' + str(round(tips, 2)))
