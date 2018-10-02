@@ -5,7 +5,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>408c57f2-0c2d-47c6-8d57-3c8c7950a72e</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>BillSplitter.py</StartupFile>
+    <StartupFile>
+    </StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,13 +23,10 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BillSplitter.py" />
-    <Compile Include="Tests\BillSpliterTest.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="_init_.py">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="bill_splitter.py" />
+    <Compile Include="main.py" />
+    <Compile Include="Tests\bill_spliter_test.py" />
+    <Compile Include="__init__.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tests\" />
