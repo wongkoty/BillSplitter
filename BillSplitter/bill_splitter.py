@@ -4,6 +4,13 @@ def main():
     split = total/people
     print('Each person pays ' + str(split) + ' dollars')
 
+def check_greater_than_zero(total):
+    if total <= 0:
+        print('Invalid number my guy')
+    else:
+        return True
+
+
 def get_total():
 
     total = input('Enter Bill Total: ')
