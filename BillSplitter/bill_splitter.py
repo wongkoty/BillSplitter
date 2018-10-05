@@ -8,6 +8,9 @@ def main():
     split = total/people
     print('Each person pays ' + str(split) + ' dollars')
 
+    import sys
+    sys.exit(0)
+
 def check_greater_than_zero(x):
     if float(x) <= 0:
         print('Bill should be greater than 0')
