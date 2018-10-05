@@ -1,24 +1,41 @@
 def main():
-    total = get_total()
-    people = int(input("Enter Number of people: "))
+    total = input('Enter Bill Total: ')
+    get_total(total)
+    people = input('How many people?: ')
+    get_people(people)
+    total = float(total)
+    people = float(people)
     split = total/people
     print('Each person pays ' + str(split) + ' dollars')
 
-def check_greater_than_zero(total):
-    if total <= 0:
-        print('Invalid number my guy')
+def check_greater_than_zero(x):
+    if float(x) <= 0:
+        print('Bill should be greater than 0')
     else:
         return True
 
+def get_people(people):
 
-def get_total():
+    while not check_number(people):
+        return main()
+        
+    while not check_greater_than_zero(people):
+        return main()
+        
+            
+    return float(people)
 
-    total = input('Enter Bill Total: ')
+def get_total(total):
 
     while not check_number(total):
-        get_total()
-             
+        return main()
+        
+    while not check_greater_than_zero(total):
+        return main()
+        
+            
     return float(total)
+    
 
         
 def check_number(value):
@@ -33,3 +50,5 @@ def check_number(value):
 
 def meow():
     return 'meow'
+
+main()
