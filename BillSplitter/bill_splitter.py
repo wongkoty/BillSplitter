@@ -167,5 +167,3 @@ def check_credit_min(value):
         print('Please enter cash or credit')
         return check_credit_min(value)
     
-
-main()
