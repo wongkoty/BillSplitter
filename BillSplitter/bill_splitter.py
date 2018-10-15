@@ -1,73 +1,8 @@
-def main():
-    total = input('Enter Bill Total: ')
-    get_total(total)
-    people = input('How many people?: ')
-    get_people(people)
-    total = float(total)
-    people = float(people)
-    total = add_tax(total)
-    total = add_tip(total)
-    split = total/people
-    split_credit_min = check_credit_min(split)
-    print('Each person pays ' + str(split_credit_min) + ' dollars')
-
-    import sys
-    sys.exit(0)
-
-def check_greater_than_zero(x):
-    if float(x) <= 0:
-        print('Bill should be greater than 0')
-    else:
-        return True
-
-def get_people(people):
-
-    while not check_number(people):
-        return main()
-        
-    while not check_greater_than_zero(people):
-        return main()
-        
-            
-    return float(people)
-
-def get_total(total):
-
-    while not check_number(total):
-        return main()
-        
-    while not check_greater_than_zero(total):
-        return main()
-        
-            
-    return float(total)
-    
-
-        
-def check_number(value):
-    try:
-        total = float(value)
-        return True;
-    except ValueError:
-        print('"{}" is not a number'.format(value))
-        print('Please put a valid number\n')
-        return False
-
-
-def meow():
-    return 'meow'
-
-
-def add_tax(value):
-
-    location = input('What state are you in?: ').lower()
-
-
-    tax_by_state = {
-    'alabama' : '0.135',
-    'alaska': '0.070',
-    'arizona': '0.107',
-    'arkansas': '0.116',
+TAXES_BY_STATE = {
+    'Alabama' : '0.135',
+    'Alaska': '0.070',
+    'Arizona': '0.107',
+    'Arkansas': '0.116',
     'california' : '0.103',
     'colorado' :  '0.100',
     'connecticut': '0.064',
@@ -92,7 +27,7 @@ def add_tax(value):
     'mississippi': '0.073',
     'missouri':  '0.109',
     'montana': '0.000',
-    'nebraska':  '0.075',   
+    'nebraska':  '0.075',
     'nevada': '0.083',
     'new hampshire': '0.000',
     'new jersey': '0.129',
@@ -117,24 +52,91 @@ def add_tax(value):
     'west virginia': '0.070',
     'wisconsin': '0.068',
     'wyoming': '0.060',
-    }
+}
+
+def main():
+    total = get_bill_total()
+    people = input('How many people?: ')
+    get_people(people)
+    total = float(total)
+    people = float(people)
+    total = add_tax(total)
+    total = add_tip(total)
+    split = total/people
+    split_credit_min = check_credit_min(split)
+    print('Each person pays ' + str(split_credit_min) + ' dollars')
+
+def get_bill_total():
+    total = 0
+    while True:
+        total = input('Enter Bill Total: ')
+        try:
+            total = float(value)
+            if total <= 0:
+                print('Bill should be greater than 0')
+            else:
+                break
+        except ValueError:
+            print('"{}" is not a number\n'.format(value))
+            print('Please put a valid number\n')
+    return total
 
 
+def check_greater_than_zero(x):
+    if float(x) <= 0:
+        return False
+    else:
+        return True
+
+def get_total(total):
+
+    while not check_number(total):
+        return main()
+
+    while not check_greater_than_zero(total):
+        return main()
+    return float(total)
+
+def get_people(people):
+
+    while not check_number(people):
+        return main()
+
+    while not check_greater_than_zero(people):
+        return main()
+
+    return float(people)
+
+
+
+def check_number(value):
     try:
-        tax_by_state[location]
+        total = float(value)
+        return True;
+    except ValueError:
+        print('"{}" is not a number'.format(value))
+        print('Please put a valid number\n')
+        return False
 
-    except KeyError:
-        print('Not a valid state')
-        return add_tax(value)
 
-    tax_adj_total = value * (float(tax_by_state[location])+1)
+def meow():
+    return 'meow'
 
-    return float(tax_adj_total)
+
+def add_tax(value):
+    tax = 0.0
+    while True:
+        location = input('What state are you in?: ')
+        valid_states = {state.lower(): state for state in TAXES_BY_STATE.keys()}
+        if location.lower() not in valid_states:
+            print('Not a valid state')
+        else:
+            tax = TAXES_BY_STATE[valid_states[location.lower]]
+            break
+    return value * (float(tax)+1)
 
 def add_tip(value):
-
     tip = input('What percent tip would you like to add?: ')
-
     try:
         float(tip)
 
@@ -145,13 +147,12 @@ def add_tip(value):
     if float(tip) <= 0:
         print('Tip must be greater than zero')
         return add_tip(value)
- 
+
     total_tip = ((float(tip)/100) + 1) * value
 
     return float(total_tip)
 
 def check_credit_min(value):
-    
     credit_check = input('Cash or Credit?: ').lower()
 
     if credit_check == 'credit':
@@ -159,11 +160,13 @@ def check_credit_min(value):
         if float(credit_min) > value:
             print('Not enough for credit')
             return check_credit_min(value)
-        else: 
+        else:
             return(value)
     if credit_check == 'cash':
         return(value)
     else:
         print('Please enter cash or credit')
         return check_credit_min(value)
-    
+
+if __name__ == '__main__':
+    main()
